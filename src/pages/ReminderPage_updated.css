@@ -1,0 +1,347 @@
+/* Reminder Page Styles - Matching index.html page-4 */
+.reminder-page {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #282828;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+}
+
+/* Reminder Header - Bottom Left */
+.reminder-header {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 10rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 2s ease-out forwards;
+  text-align: left;
+}
+
+/* Reminder App Container - Top Right */
+.reminder-app-container {
+  position: absolute;
+  top: 200px;
+  bottom: 50px;
+  right: 50px;
+  width: 450px;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+
+.reminder-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.datetime-input-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.reminder-date-input,
+.reminder-time-input {
+  flex-shrink: 0;
+}
+
+.reminder-datetime {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.reminder-input {
+  flex: 1;
+  padding: 15px 0;
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #555;
+  color: #ffffff;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.reminder-input::placeholder {
+  color: #888;
+}
+
+.reminder-input:focus {
+  border-bottom-color: #ff8800;
+}
+
+.reminder-time-input {
+  width: 120px;
+  padding: 15px 10px;
+  font-size: 1.1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid #555;
+  border-radius: 8px;
+  color: #ffffff;
+  outline: none;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  cursor: ns-resize;
+}
+
+.reminder-time-input:focus {
+  border-color: #ff8800;
+  background: rgba(255, 136, 0, 0.1);
+  box-shadow: 0 0 0 3px rgba(255, 136, 0, 0.2);
+}
+
+.reminder-time-input:hover {
+  border-color: #777;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Hide the time picker icon */
+.reminder-time-input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Hide the date picker icon */
+.reminder-date-input::-webkit-calendar-picker-indicator {
+  display: none;
+}
+
+/* Time scroll hint */
+.time-scroll-hint {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  font-size: 0.8rem;
+  color: #888;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.reminder-time-input:hover + .time-scroll-hint {
+  opacity: 1;
+}
+
+.add-reminder-btn {
+  padding: 15px 20px;
+  background-color: #ff8800;
+  color: #000;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.add-reminder-btn:hover {
+  background-color: #ffaa00;
+  transform: translateY(-2px);
+}
+
+.reminder-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.reminder-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+  margin-bottom: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border-left: 4px solid #ff8800;
+  transition: all 0.3s ease;
+}
+
+.reminder-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateX(5px);
+}
+
+.reminder-item.completed {
+  opacity: 0.6;
+  border-left-color: #666;
+}
+
+.reminder-content {
+  flex: 1;
+  margin-right: 15px;
+}
+
+.reminder-text {
+  font-size: 1.1rem;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.reminder-time {
+  font-size: 0.9rem;
+  color: #ff8800;
+  font-weight: bold;
+}
+
+.reminder-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.reminder-complete-btn {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: 2px solid #666;
+  border-radius: 50%;
+  color: #666;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reminder-complete-btn:hover {
+  border-color: #ff8800;
+  color: #ff8800;
+}
+
+.reminder-complete-btn.completed {
+  background-color: #ff8800;
+  border-color: #ff8800;
+  color: #000;
+}
+
+.reminder-delete-btn {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 18px;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reminder-delete-btn:hover {
+  color: #ff4444;
+}
+
+/* Custom scrollbar for reminder list */
+.reminder-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.reminder-list::-webkit-scrollbar-track {
+  background: #333;
+  border-radius: 3px;
+}
+
+.reminder-list::-webkit-scrollbar-thumb {
+  background: #666;
+  border-radius: 3px;
+}
+
+.reminder-list::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
+/* Loading States */
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding: 40px 20px;
+  color: #888;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #333;
+  border-top: 2px solid #ff8800;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.no-reminders {
+  text-align: center;
+  padding: 40px 20px;
+  color: #888;
+}
+
+.no-reminders p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .reminder-header {
+    font-size: 6rem;
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .reminder-app-container {
+    width: calc(100vw - 40px);
+    right: 20px;
+    top: 150px;
+  }
+  
+  .reminder-input-wrapper {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .reminder-time-input {
+    width: 100%;
+  }
+  
+  .reminder-item {
+    padding: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .reminder-actions {
+    align-self: flex-end;
+  }
+}
