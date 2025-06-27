@@ -3,6 +3,7 @@ import { GoogleAuthProvider, useGoogleAuth } from './contexts/GoogleAuthContext'
 import Dashboard from './Dashboard';
 import GoogleLoginForm from './components/GoogleLoginForm';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
 const AppContent: React.FC = () => {
   const { user, logout } = useGoogleAuth();
@@ -42,9 +43,42 @@ const AppContent: React.FC = () => {
   );
 };
 
+function LoginHandler() {
+  const { setUser, setToken } = useGoogleAuth();
+  const navigate = useNavigate();
+  React.useEffect(() => {
+    const hash = window.location.hash;
+    if (hash && hash.includes('id_token')) {
+      const params = new URLSearchParams(hash.replace(/^#/, ''));
+      const idToken = params.get('id_token');
+      if (idToken) {
+        setToken(idToken);
+        try {
+          const user = JSON.parse(atob(idToken.split('.')[1]));
+          setUser(user);
+          localStorage.setItem('google_token', idToken);
+          localStorage.setItem('google_user', JSON.stringify(user));
+        } catch {}
+        window.location.hash = '';
+        navigate('/');
+      } else {
+        navigate('/');
+      }
+    } else {
+      navigate('/');
+    }
+  }, [setUser, setToken, navigate]);
+  return <div>Logging in...</div>;
+}
+
 const App: React.FC = () => (
   <GoogleAuthProvider>
-    <AppContent />
+    <Router>
+      <Routes>
+        <Route path="/login" element={<LoginHandler />} />
+        <Route path="/*" element={<AppContent />} />
+      </Routes>
+    </Router>
   </GoogleAuthProvider>
 );
 
