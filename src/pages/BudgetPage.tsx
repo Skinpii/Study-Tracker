@@ -247,19 +247,19 @@ const BudgetPage: React.FC<BudgetPageProps> = ({ currentPage }) => {
             <div className="stat-value">₹{stats.averageExpense}</div>
             <div className="stat-label">Avg Expense</div>
           </div>          <div className="stat-item">
-            <div className={`stat-value ${stats.todayBalance >= 0 ? 'positive' : 'negative'}`}>
+            <div className={`stat-value ₹{stats.todayBalance >= 0 ? 'positive' : 'negative'}`}>
               ₹{Math.abs(stats.todayBalance)}
             </div>
             <div className="stat-label">Today</div>
           </div>
           <div className="stat-item">
-            <div className={`stat-value ${stats.weekBalance >= 0 ? 'positive' : 'negative'}`}>
+            <div className={`stat-value ₹{stats.weekBalance >= 0 ? 'positive' : 'negative'}`}>
               ₹{Math.abs(stats.weekBalance)}
             </div>
             <div className="stat-label">This Week</div>
           </div>
           <div className="stat-item">
-            <div className={`stat-value ${stats.monthBalance >= 0 ? 'positive' : 'negative'}`}>
+            <div className={`stat-value ₹{stats.monthBalance >= 0 ? 'positive' : 'negative'}`}>
               ₹{Math.abs(stats.monthBalance)}
             </div>
             <div className="stat-label">This Month</div>
