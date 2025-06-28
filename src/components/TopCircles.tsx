@@ -36,7 +36,7 @@ const TopCircles: React.FC<TopCirclesProps> = ({ currentPage }) => {
           <div className="circle-budget-display">
             <div className="budget-label">Balance</div>
             <div className={`budget-amount ${balance >= 0 ? 'positive' : 'negative'}`}>
-              ${Math.abs(balance).toFixed(0)}
+              ₹{Math.abs(balance).toFixed(0)}
             </div>
           </div>
         )}
@@ -51,7 +51,7 @@ const TopCircles: React.FC<TopCirclesProps> = ({ currentPage }) => {
           <div className="circle-budget-display">
             <div className="budget-label">Income</div>
             <div className="budget-amount">
-              ${totalIncome.toFixed(0)}
+              ₹{totalIncome.toFixed(0)}
             </div>
           </div>
         )}
@@ -66,7 +66,7 @@ const TopCircles: React.FC<TopCirclesProps> = ({ currentPage }) => {
           <div className="circle-budget-display">
             <div className="budget-label">Expenses</div>
             <div className="budget-amount">
-              ${totalExpenses.toFixed(0)}
+              ₹{totalExpenses.toFixed(0)}
             </div>
           </div>
         )}
