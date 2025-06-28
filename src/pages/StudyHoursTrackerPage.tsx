@@ -30,6 +30,7 @@ const StudyHoursTrackerPage: React.FC = () => {
     favoriteSubject: 'None'
   });
   const [currentSessionStart, setCurrentSessionStart] = useState<Date | null>(null);
+  const [startTimestamp, setStartTimestamp] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
   const { token } = useGoogleAuth();
 
@@ -55,15 +56,39 @@ const StudyHoursTrackerPage: React.FC = () => {
   // Timer effect
   useEffect(() => {
     let interval: ReturnType<typeof setInterval> | undefined;
-    if (isRunning) {
+    if (isRunning && startTimestamp) {
       interval = setInterval(() => {
-        setTime((prev) => prev + 1);
+        setTime(Math.floor((Date.now() - startTimestamp) / 1000));
       }, 1000);
     }
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isRunning, setTime]);
+  }, [isRunning, startTimestamp, setTime]);
+
+  // Persist startTimestamp and isRunning in localStorage for reload/tab switch resilience
+  useEffect(() => {
+    if (isRunning && startTimestamp) {
+      localStorage.setItem('study_timer_start', startTimestamp.toString());
+      localStorage.setItem('study_timer_running', '1');
+    } else {
+      localStorage.removeItem('study_timer_start');
+      localStorage.removeItem('study_timer_running');
+    }
+  }, [isRunning, startTimestamp]);
+
+  // On mount, restore timer state if needed
+  useEffect(() => {
+    const running = localStorage.getItem('study_timer_running');
+    const start = localStorage.getItem('study_timer_start');
+    if (running && start) {
+      setIsRunning(true);
+      setStartTimestamp(Number(start));
+      setCurrentSessionStart(new Date(Number(start)));
+      setTime(Math.floor((Date.now() - Number(start)) / 1000));
+    }
+    // eslint-disable-next-line
+  }, []);
 
   const calculateStats = (sessionList: StudySession[]) => {
     if (sessionList.length === 0) {
@@ -129,16 +154,20 @@ const StudyHoursTrackerPage: React.FC = () => {
       return;
     }
     setIsRunning(true);
-    setCurrentSessionStart(new Date());
+    const now = Date.now();
+    setStartTimestamp(now);
+    setCurrentSessionStart(new Date(now));
+    setTime(0);
   };
 
   const stopTimer = async () => {
-    if (!isRunning || !currentSessionStart || !token) return;
+    if (!isRunning || !currentSessionStart || !token || !startTimestamp) return;
     setIsRunning(false);
-    const endTime = new Date();
+    const endTime = Date.now();
+    const elapsed = Math.floor((endTime - startTimestamp) / 1000);
     const newSession = {
       subject: subject.trim(),
-      duration: time,
+      duration: elapsed,
       type: 'study' as 'study',
       date: currentSessionStart.toISOString(),
     };
@@ -153,11 +182,13 @@ const StudyHoursTrackerPage: React.FC = () => {
     setTime(0);
     setSubject('');
     setCurrentSessionStart(null);
+    setStartTimestamp(null);
   };
 
   const resetTimer = () => {
     setTime(0);
     setIsRunning(false);
+    setStartTimestamp(null);
   };
 
   const deleteSession = async (sessionId: string) => {
