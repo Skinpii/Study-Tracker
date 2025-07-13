@@ -25,29 +25,15 @@
   font-weight: bold;
   color: #000000;
   cursor: pointer;
-  transition: background-color 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55),
-              transform 0.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition: background-color 0.3s ease;
   user-select: none;
   border: none;
   outline: none;
 }
 
 .orange-circle:hover {
-  background-color: #ffaa00;
-  animation: pulse 0.4s;
-  transform: scale(1.12) rotate(-2deg);
-  /* box-shadow removed to eliminate glow effect */
-@keyframes pulse {
-  0% {
-    transform: scale(1) rotate(0deg);
-  }
-  50% {
-    transform: scale(1.15) rotate(-3deg);
-  }
-  100% {
-    transform: scale(1.12) rotate(-2deg);
-  }
-}
+  background-color: transparent;
+  /* background becomes transparent on hover */
 }
 
 .orange-circle:active {
