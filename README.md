@@ -1,81 +1,209 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Study Tracker
 
-Currently, two official plugins are available:
+A comprehensive web application for students to manage their study sessions, tasks, notes, reminders, and budgets, powered by AI for productivity and planning.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Table of Contents
+- [Project Overview](#project-overview)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Frontend (React)](#frontend-react)
+  - [Main Components](#main-components)
+  - [Context Providers](#context-providers)
+  - [Pages](#pages)
+  - [Lib (API & AI)](#lib-api--ai)
+- [Backend (Node.js/Express)](#backend-nodejsexpress)
+  - [Server](#server)
+  - [Models](#models)
+  - [Routes](#routes)
+  - [Middleware](#middleware)
+- [AI Integration](#ai-integration)
+- [Environment Variables](#environment-variables)
+- [How to Run](#how-to-run)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Project Overview
+
+Study Tracker is a full-stack productivity tool for students. It allows users to:
+- Track study sessions and hours
+- Manage tasks and to-dos
+- Take and summarize notes
+- Set reminders
+- Track budgets (income/expenses)
+- Use AI to generate study plans, summaries, and quizzes
+
+The frontend is built with React and TypeScript, while the backend uses Node.js and Express. AI features are powered by Google Gemini API.
+
+---
+
+## Tech Stack
+
+- **Frontend:** React, TypeScript, Vite
+- **Backend:** Node.js, Express
+- **Database:** (Not specified, but typical options: MongoDB, PostgreSQL)
+- **AI:** Google Gemini API
+- **Authentication:** Custom (with Google OAuth support)
+- **Styling:** CSS Modules
+
+---
+
+## Project Structure
+
+```
+Study-Tracker-main/
+├── backend/                # Node.js/Express backend
+│   ├── models/             # Mongoose models (Budget, Note, Reminder, StudySession, Task)
+│   ├── routes/             # Express route handlers
+│   ├── middleware/         # Auth middleware
+│   └── server.js           # Main server file
+├── src/                    # React frontend
+│   ├── components/         # UI components
+│   ├── contexts/           # React context providers
+│   ├── lib/                # API and AI utility functions
+│   ├── pages/              # Main app pages
+│   ├── types/              # TypeScript types
+│   └── App.tsx             # Main app entry
+├── package.json            # Project metadata and scripts
+├── vite.config.ts          # Vite configuration
+└── ...
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Frontend (React)
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### Main Components
+- **Header.tsx:** Top navigation bar
+- **Sidebar.tsx:** Side navigation for page switching
+- **Layout.tsx:** Main layout wrapper
+- **Description.tsx:** Displays app description
+- **GoogleLoginForm.tsx:** Google OAuth login
+- **ui/button.tsx, ui/card.tsx:** Reusable UI elements
+
+### Context Providers
+- **AuthContext_new.tsx:** Handles user authentication state
+- **GoogleAuthContext.tsx:** Google OAuth context
+- **BudgetContext.tsx:** Budget state and actions
+- **TimerContext.tsx:** Study timer and session tracking
+
+### Pages
+- **AIPoweredPage.tsx:** AI-powered features (study plan, quiz, summary)
+- **BudgetPage.tsx:** Budget management
+- **NotesPage.tsx:** Notes and summaries
+- **ReminderPage_updated.tsx:** Reminders and notifications
+- **StudyHoursTrackerPage.tsx:** Track study hours
+- **StudyTrackerPage.tsx:** Main dashboard
+- **TaskManagerPage_updated.tsx:** Task and to-do management
+
+### Lib (API & AI)
+- **ai.ts:** Integrates Google Gemini API for:
+  - Study plan generation
+  - Notes summarization
+  - Quiz question generation
+  - Natural language command parsing (for tasks, reminders, budget, navigation)
+- **api.ts, budget-api.ts, notes-api.ts, reminders-api.ts, study-sessions-api.ts, tasks-api.ts:** API utilities for communicating with backend endpoints
+
+---
+
+## Backend (Node.js/Express)
+
+### Server
+- **server.js:** Main Express server, sets up middleware, routes, and error handling
+
+### Models
+- **Budget.js:** Mongoose model for budget entries
+- **Note.js:** Mongoose model for notes
+- **Reminder.js:** Mongoose model for reminders
+- **StudySession.js:** Mongoose model for study sessions
+- **Task.js:** Mongoose model for tasks
+
+### Routes
+- **budget.js:** Budget CRUD endpoints
+- **notes.js:** Notes CRUD endpoints
+- **reminders.js:** Reminders CRUD endpoints
+- **study-sessions.js:** Study session endpoints
+- **tasks.js:** Task CRUD endpoints
+
+### Middleware
+- **auth.js:** Authentication middleware for protected routes
+
+---
+
+## AI Integration
+
+- **Google Gemini API** is used for:
+  - Generating study plans based on subject, goals, and available time
+  - Summarizing notes
+  - Creating quiz questions
+  - Parsing natural language commands (e.g., "remind me at 7pm", "I spent ₹100 on lunch")
+- The AI logic is in `src/lib/ai.ts` and is called from the AI-powered page and other features.
+
+---
+
+## Environment Variables
+
+- **Frontend:**
+  - `VITE_GEMINI_API_KEY` (for Google Gemini API)
+- **Backend:**
+  - `PORT` (server port)
+  - `MONGODB_URI` (MongoDB connection string)
+  - `JWT_SECRET` (for authentication)
+  - `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` (for Google OAuth)
+
+---
+
+## How to Run
+
+### 1. Clone the repository
+```sh
+git clone <repo-url>
+cd Study-Tracker-main
 ```
 
-I have addressed the `Firebase: Error (auth/invalid-api-key)` issue. Here's a summary of the changes and the next steps you need to take:
+### 2. Install dependencies
+```sh
+npm install
+cd backend
+npm install
+```
 
-### Root Cause
+### 3. Set up environment variables
+- Create a `.env` file in the root and in `backend/` with the required variables.
 
-The error was caused by placeholder credentials in the `src/firebase.ts` file.
+### 4. Start the backend
+```sh
+cd backend
+node server.js
+```
 
-### Solution
+### 5. Start the frontend
+```sh
+cd ..
+npm run dev
+```
 
-1.  **Switched to Environment Variables**: I updated `src/firebase.ts` to use environment variables for your Firebase configuration. This is a more secure and flexible approach.
+---
 
-2.  **Configuration Template**: I created a file named `env.txt` in the root of your project. This file contains all the necessary environment variables.
+## Deployment
+- The project can be deployed on platforms like Vercel, Netlify (frontend), and Heroku, Render, or Railway (backend).
+- See `vercel.json` for Vercel configuration.
 
-### Your Next Steps
+---
 
-1.  **Create a `.env` file**: Create a new file named `.env` in the root of your project.
+## Contributing
+1. Fork the repo
+2. Create a new branch
+3. Make your changes
+4. Submit a pull request
 
-2.  **Populate `.env`**: Copy the contents of `env.txt` into your new `.env` file.
+---
 
-3.  **Add Your Credentials**: Replace the placeholder values (e.g., `"YOUR_API_KEY"`) in the `.env` file with your actual Firebase project credentials. You can find these in your Firebase project settings.
+## License
 
-4.  **Production Environment**: For your live website, you must also add these same environment variables to your hosting provider's settings (e.g., Netlify, Vercel, etc.).
-
-Your `.gitignore` file is already set up to ignore `.env` files, so your credentials will not be committed to your repository.
-
-Once you've completed these steps, the error on your live site should be resolved.
-"# Study-Tracker" 
+This project is licensed under the MIT License.
