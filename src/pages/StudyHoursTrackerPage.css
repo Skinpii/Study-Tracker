@@ -1,0 +1,403 @@
+/* StudyHoursTrackerPage styles - Minimal design with white and orange only */
+.study-hours-tracker-page {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow-y: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #282828;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+}
+
+.study-hours-header {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 10rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 2s ease-out forwards;
+  text-align: left;
+  line-height: 0.9;
+}
+
+/* Timer Section - Minimal design */
+.timer-section {
+  position: absolute;
+  top: 200px;
+  left: 50px;
+  width: 500px;
+  z-index: 10;
+}
+
+.timer-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.subject-input-wrapper {
+  width: 100%;
+}
+
+.subject-input {
+  width: 100%;
+  padding: 15px 0;
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid #555;
+  color: #ffffff;
+  outline: none;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.subject-input::placeholder {
+  color: #888;
+}
+
+.subject-input:focus {
+  border-bottom-color: #ff8800;
+}
+
+.subject-input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.timer-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.timer-btn {
+  padding: 15px 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: 2px solid;
+  background: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  min-width: 100px;
+}
+
+.start-btn {
+  border-color: #ff8800;
+  color: #ff8800;
+}
+
+.start-btn:hover {
+  background-color: #ff8800;
+  color: #000;
+}
+
+.stop-btn {
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.stop-btn:hover {
+  background-color: #ffffff;
+  color: #000;
+}
+
+.reset-btn {
+  border-color: #555;
+  color: #555;
+}
+
+.reset-btn:hover {
+  border-color: #888;
+  color: #888;
+}
+
+/* Statistics Section - Minimal */
+.stats-section {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+  width: 600px;
+  z-index: 10;
+  background: transparent;
+}
+
+.stats-title {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 30px;
+  text-align: left;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px 20px;
+  margin-bottom: 30px;
+  background: transparent;
+}
+
+.stat-item {
+  text-align: left;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #444;
+  background: transparent;
+}
+
+.stat-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-family: 'Courier New', monospace;
+}
+
+.stat-value.favorite-subject {
+  font-size: 1.2rem;
+  font-family: Arial, sans-serif;
+  color: #ff8800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Sessions Section - Minimal */
+.sessions-section {
+  position: absolute;
+  top: 480px;
+  right: 130px;
+  width: 600px; 
+  z-index: 10;
+  max-height: 300px;
+}
+
+.sessions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #444;
+}
+
+.sessions-title {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.clear-data-btn {
+  padding: 8px 16px;
+  background: none;
+  color: #888;
+  border: 1px solid #555;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.8rem;
+}
+
+.clear-data-btn:hover {
+  border-color: #ff8800;
+  color: #ff8800;
+}
+
+.sessions-list {
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.no-sessions {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+  padding: 40px;
+}
+
+.session-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  transition: all 0.3s ease;
+  background: transparent;
+  border: none;
+  margin: 0;
+}
+
+.session-item:hover {
+  padding-left: 10px;
+  background: transparent;
+}
+
+.session-content {
+  flex: 1;
+}
+
+.session-subject {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 5px;
+  text-transform: capitalize;
+}
+
+.session-details {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.session-duration {
+  color: #ff8800;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.session-time {
+  color: #888;
+  font-size: 0.9rem;
+}
+
+.delete-session-btn {
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 20px;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.delete-session-btn:hover {
+  color: #ff8800;
+}
+
+/* Custom scrollbar - Minimal */
+.sessions-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sessions-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sessions-list::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 2px;
+}
+
+.sessions-list::-webkit-scrollbar-thumb:hover {
+  background: #ff8800;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .study-hours-header {
+    font-size: 8rem;
+  }
+  
+  .timer-section {
+    width: 450px;
+  }
+  
+  .stats-section {
+    width: 500px;
+  }
+  
+  .sessions-section {
+    width: 500px;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .study-hours-header {
+    font-size: 6rem;
+  }
+  
+  .timer-section {
+    width: 400px;
+  }
+  
+  .stats-section {
+    width: 450px;
+  }
+  
+  .sessions-section {
+    bottom: 180px;
+    width: 450px;
+  }
+}
+
+@media (max-width: 800px) {
+  .study-hours-header {
+    font-size: 4rem;
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .timer-section {
+    top: 30px;
+    left: 20px;
+    width: calc(100% - 40px);
+  }
+  
+  .stats-section {
+    top: 400px;
+    right: 20px;
+    width: calc(100% - 40px);
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+    .sessions-section {
+    bottom: 160px;
+    right: 20px;
+    width: calc(100% - 40px);
+  }
+}
