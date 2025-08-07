@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Toaster } from 'react-hot-toast';
+import { useCurrentPage } from './contexts/PageContext';
 import './App.css';
 
 // Components
 import TopCircles from './components/TopCircles';
 import Description from './components/Description';
+import SimpleCursorBall from './components/SimpleCursorBall';
 import StudyTrackerPage from './pages/StudyTrackerPage';
 import AIPoweredPage from './pages/AIPoweredPage';
 import TaskManagerPage from './pages/TaskManagerPage_updated';
@@ -17,7 +19,7 @@ import { TimerProvider } from './contexts/TimerContext';
 import { BudgetProvider } from './contexts/BudgetContext';
 
 const Dashboard: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const { currentPage, setCurrentPage } = useCurrentPage();
   const { scrollYProgress } = useScroll();
 
   // Calculate page transforms based on scroll progress (7 pages now)
@@ -76,6 +78,23 @@ const Dashboard: React.FC = () => {
     });
   };
 
+  // Handle app navigation from StudyTrackerPage
+  const handleAppNavigation = (appRoute: string) => {
+    const routeToPageMap: { [key: string]: number } = {
+      'ai-powered': 2,
+      'tasks': 3,
+      'reminders': 4,
+      'notes': 5,
+      'budget': 6,
+      'study-hours': 7,
+    };
+    
+    const pageNumber = routeToPageMap[appRoute];
+    if (pageNumber) {
+      goToPage(pageNumber);
+    }
+  };
+
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -110,7 +129,10 @@ const Dashboard: React.FC = () => {
   return (
     <TimerProvider>
       <BudgetProvider>
-        <div className="app-container">
+        <div className={`app-container ${currentPage === 1 ? 'hide-ui-elements' : ''}`}>
+        {/* Global Cursor Ball - only show on pages 2-7, not on front page */}
+        {currentPage !== 1 && <SimpleCursorBall />}
+        
         {/* Toast notifications */}
         <Toaster 
           position="top-right"
@@ -129,7 +151,7 @@ const Dashboard: React.FC = () => {
 
       {/* Page 1 - Study Tracker */}
       <div className="page page-1">
-        <StudyTrackerPage onExploreClick={() => goToPage(2)} />
+        <StudyTrackerPage onNavigateToApp={handleAppNavigation} />
       </div>
 
       {/* Page 2 - AI Powered */}

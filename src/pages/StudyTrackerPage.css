@@ -1,27 +1,68 @@
 /* StudyTrackerPage.css */
-.study-tracker {
+.study-tracker-page {
+  width: 100vw;
+  height: 100vh;
   position: fixed;
-  bottom: 20px;
-  left: 20px;
-  font-size: 10rem;
+  top: 0;
+  left: 0;
+  background-color: #000000ff;
+  overflow: hidden;
+}
+
+.torch-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+
+.study-tracker-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 8rem;
   font-weight: bold;
   color: #ffffff;
-  /* text-shadow removed to eliminate glow effect */
+  text-align: center;
   line-height: 0.9;
+  z-index: 5;
+  text-shadow: 0 0 30px #ff8800;
+}
+
+.app-button {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: transparent;
+  border: none;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #ffffff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  z-index: 15;
+  padding: 0;
+}
+
+.app-button:hover {
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .orange-circle {
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 300px;
-  height: 300px;
+  width: 200px;
+  height: 200px;
   background-color: #ff8800;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
   color: #000000;
   cursor: pointer;
@@ -29,11 +70,12 @@
   user-select: none;
   border: 1.5px solid #ff8800;
   outline: none;
+  z-index: 20;
 }
 
 .orange-circle:hover {
   background-color: transparent;
-  /* background becomes transparent on hover */
+  color: #ff8800;
 }
 
 .orange-circle:active {

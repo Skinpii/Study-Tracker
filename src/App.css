@@ -21,6 +21,22 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
+/* Global cursor ball styles */
+.global-cursor-ball {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  pointer-events: none !important;
+  z-index: 9999 !important;
+  background: transparent !important;
+}
+
+.global-cursor-ball canvas {
+  background: transparent !important;
+}
+
 .page {
   width: 100vw;
   height: 100vh;
@@ -309,4 +325,13 @@ body::-webkit-scrollbar {
 
 .logout-button:hover {
   text-decoration: underline;
+}
+
+/* Hide UI elements on front page (torch effect page) */
+.hide-ui-elements .top-circles {
+  display: none !important;
+}
+
+.hide-ui-elements .description {
+  display: none !important;
 }
