@@ -103,70 +103,28 @@ const BackendHealthCheck: React.FC<{ children: React.ReactNode }> = ({ children 
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        backgroundColor: '#f5f5f5',
+        backgroundColor: '#1a1a1a',
         fontFamily: 'Arial, sans-serif'
       }}>
-        <div style={{
-          backgroundColor: 'white',
-          padding: '3rem 2rem',
-          borderRadius: '12px',
-          boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-          textAlign: 'center',
-          maxWidth: '400px',
-          margin: '0 1rem'
+        <Loader />
+        
+        <h2 style={{
+          color: '#ffffff',
+          fontSize: '1.5rem',
+          fontWeight: '500',
+          marginTop: '2rem',
+          marginBottom: '0.5rem'
         }}>
-          <Loader />
-          
-          <h2 style={{
-            color: '#333',
-            marginBottom: '1rem',
-            fontSize: '1.5rem',
-            marginTop: '2rem'
-          }}>
-            Starting Backend
-          </h2>
-          
-          <p style={{
-            color: '#666',
-            fontSize: '1rem',
-            lineHeight: '1.5',
-            marginBottom: '1.5rem'
-          }}>
-            {error || `Please wait while we connect to the server${dots}`}
-          </p>
-          
-          <div style={{
-            padding: '0.5rem 1rem',
-            backgroundColor: '#f8f9fa',
-            borderRadius: '6px',
-            fontSize: '0.875rem',
-            color: '#666',
-            marginBottom: '1rem'
-          }}>
-            Backend URL: {getBackendUrl()}
-          </div>
-          
-          <button
-            onClick={() => {
-              console.log('User manually skipped backend check');
-              setIsChecking(false);
-              setIsBackendReady(true);
-              setError(null);
-            }}
-            style={{
-              padding: '0.75rem 1.5rem',
-              backgroundColor: '#007bff',
-              color: 'white',
-              border: 'none',
-              borderRadius: '6px',
-              cursor: 'pointer',
-              fontSize: '0.875rem',
-              fontWeight: '500'
-            }}
-          >
-            Continue Anyway
-          </button>
-        </div>
+          Starting Backend
+        </h2>
+        
+        <p style={{
+          color: '#cccccc',
+          fontSize: '1rem',
+          marginTop: '0.5rem'
+        }}>
+          Please wait while we connect to the server{dots}
+        </p>
       </div>
     );
   }
