@@ -103,7 +103,7 @@ const BackendHealthCheck: React.FC<{ children: React.ReactNode }> = ({ children 
         alignItems: 'center',
         justifyContent: 'center',
         height: '100vh',
-        backgroundColor: '#1a1a1a',
+        backgroundColor: '#000000ff',
         fontFamily: 'Arial, sans-serif'
       }}>
         <Loader />
