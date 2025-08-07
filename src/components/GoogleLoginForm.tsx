@@ -18,10 +18,10 @@ export default function GoogleLoginForm() {
         textAlign: 'center',
         marginBottom: '3rem'
       }}>
-        <h1 style={{
-          fontSize: '2.5rem',
+       <h1 style={{
+          fontSize: '5rem',
           fontWeight: '300',
-          color: '#202124',
+          color: '#ffffffff',
           margin: '0 0 0.5rem 0'
         }}>
           Study Tracker
