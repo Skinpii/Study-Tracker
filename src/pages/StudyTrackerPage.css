@@ -1,12 +1,10 @@
 /* StudyTrackerPage.css */
 .study-tracker-page {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #000000ff;
+  position: relative;
   overflow: hidden;
+  background-color: #000000;
 }
 
 .torch-effect {
@@ -49,6 +47,43 @@
 
 .app-button:hover {
   transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Mystical guidance message */
+.torch-guidance {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #a0a0a0; /* Dark silver color */
+  font-size: 1rem;
+  font-weight: 300;
+  z-index: 20;
+  pointer-events: none;
+  user-select: none;
+}
+
+.torch-guidance p {
+  margin: 5px 0;
+  color: #a0a0a0; /* Same dark silver color for both paragraphs */
+  text-shadow: 0 0 10px rgba(160, 160, 160, 0.3);
+  animation: gentleGlow 3s ease-in-out infinite alternate;
+}
+
+.torch-guidance p:first-child {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #a0a0a0; /* Same dark silver color */
+}
+
+@keyframes gentleGlow {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  }
+  100% {
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(255, 255, 255, 0.2);
+  }
 }
 
 .orange-circle {

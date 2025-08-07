@@ -72,6 +72,12 @@ const StudyTrackerPage: React.FC<StudyTrackerPageProps> = ({ onNavigateToApp }) 
           <ShinyText text={app.name} speed={3} />
         </motion.button>
       ))}
+
+      {/* Mystical guidance message */}
+      <div className="torch-guidance">
+        <p> The ball you hold is your light </p>
+        <p>Move it through the darkness to reveal hidden paths</p>
+      </div>
     </div>
   );
 };

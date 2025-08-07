@@ -21,6 +21,15 @@ body::-webkit-scrollbar {
   position: relative;
 }
 
+/* Disable user scrolling only on first page */
+.app-container.disable-scroll {
+  overflow: hidden;
+}
+
+body.disable-scroll {
+  overflow: hidden;
+}
+
 /* Global cursor ball styles */
 .global-cursor-ball {
   position: fixed !important;

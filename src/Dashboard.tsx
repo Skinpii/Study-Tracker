@@ -67,8 +67,42 @@ const Dashboard: React.FC = () => {
     return () => unsubscribe();
   }, [scrollYProgress]);
 
+  // Disable scrolling on front page while allowing navigation
+  useEffect(() => {
+    const preventScroll = (e: Event) => {
+      if (currentPage === 1) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    };
+
+    if (currentPage === 1) {
+      // Disable scroll events
+      window.addEventListener('wheel', preventScroll, { passive: false });
+      window.addEventListener('touchmove', preventScroll, { passive: false });
+      window.addEventListener('keydown', (e) => {
+        if (currentPage === 1 && (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === ' ' || e.key === 'PageDown' || e.key === 'PageUp')) {
+          e.preventDefault();
+        }
+      });
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      window.removeEventListener('wheel', preventScroll);
+      window.removeEventListener('touchmove', preventScroll);
+      document.body.style.overflow = '';
+    };
+  }, [currentPage]);
+
   // Navigation function
   const goToPage = (pageNumber: number) => {
+    // Temporarily enable scrolling for navigation
+    document.body.style.overflow = '';
+    
     const windowHeight = window.innerHeight;
     const targetScroll = (pageNumber - 1) * windowHeight;
     
