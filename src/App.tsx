@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { GoogleAuthProvider, useGoogleAuth } from './contexts/GoogleAuthContext';
 import Dashboard from './Dashboard';
 import GoogleLoginForm from './components/GoogleLoginForm';
+import Loader from './components/Loader';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
 
@@ -107,46 +108,40 @@ const BackendHealthCheck: React.FC<{ children: React.ReactNode }> = ({ children 
       }}>
         <div style={{
           backgroundColor: 'white',
-          padding: '2rem',
+          padding: '3rem 2rem',
           borderRadius: '12px',
           boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
           textAlign: 'center',
           maxWidth: '400px',
           margin: '0 1rem'
         }}>
-          <div style={{
-            width: '60px',
-            height: '60px',
-            border: '4px solid #e3e3e3',
-            borderTop: '4px solid #3498db',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto 1.5rem'
-          }}></div>
+          <Loader />
           
           <h2 style={{
             color: '#333',
             marginBottom: '1rem',
-            fontSize: '1.5rem'
+            fontSize: '1.5rem',
+            marginTop: '2rem'
           }}>
-            {error ? 'Starting Backend' : 'Connecting to Backend'}
+            Starting Backend
           </h2>
           
           <p style={{
             color: '#666',
             fontSize: '1rem',
-            lineHeight: '1.5'
+            lineHeight: '1.5',
+            marginBottom: '1.5rem'
           }}>
-            {error || `Checking backend connection${dots}`}
+            {error || `Please wait while we connect to the server${dots}`}
           </p>
           
           <div style={{
-            marginTop: '1.5rem',
             padding: '0.5rem 1rem',
             backgroundColor: '#f8f9fa',
             borderRadius: '6px',
             fontSize: '0.875rem',
-            color: '#666'
+            color: '#666',
+            marginBottom: '1rem'
           }}>
             Backend URL: {getBackendUrl()}
           </div>
@@ -159,7 +154,6 @@ const BackendHealthCheck: React.FC<{ children: React.ReactNode }> = ({ children 
               setError(null);
             }}
             style={{
-              marginTop: '1rem',
               padding: '0.75rem 1.5rem',
               backgroundColor: '#007bff',
               color: 'white',
@@ -173,15 +167,6 @@ const BackendHealthCheck: React.FC<{ children: React.ReactNode }> = ({ children 
             Continue Anyway
           </button>
         </div>
-        
-        <style>
-          {`
-            @keyframes spin {
-              0% { transform: rotate(0deg); }
-              100% { transform: rotate(360deg); }
-            }
-          `}
-        </style>
       </div>
     );
   }
