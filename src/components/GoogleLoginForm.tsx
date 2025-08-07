@@ -7,7 +7,7 @@ export default function GoogleLoginForm() {
     <div style={{
       width: '100vw',
       height: '100vh',
-      backgroundColor: '#ffffff',
+      backgroundColor: '#000000ff',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
