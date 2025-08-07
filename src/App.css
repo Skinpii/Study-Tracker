@@ -1,6 +1,6 @@
 /* App.css */
 html, body {
-  background-color: #282828;
+  background-color: #000000ff;
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
@@ -30,7 +30,7 @@ body::-webkit-scrollbar {
   overflow: hidden;
   padding: 20px;
   box-sizing: border-box;
-  background-color: #282828;
+  background-color: #000000ff;
   font-family: Arial, sans-serif;
   color: #ffffff;
 }
