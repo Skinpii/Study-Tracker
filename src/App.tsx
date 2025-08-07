@@ -21,7 +21,7 @@ const BackendHealthCheck: React.FC<{ children: React.ReactNode }> = ({ children 
   };
 
   const checkBackendHealth = async () => {
-    // Skip backend health check for local development
+    // Only run backend health check when deployed online (not localhost)
     if (isLocalDevelopment()) {
       console.log('Local development detected, skipping backend health check');
       setIsChecking(false);
