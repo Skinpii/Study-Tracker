@@ -1,0 +1,41 @@
+/* StudyTrackerPage.css */
+.study-tracker {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  font-size: 10rem;
+  font-weight: bold;
+  color: #ffffff;
+  /* text-shadow removed to eliminate glow effect */
+  line-height: 0.9;
+}
+
+.orange-circle {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 300px;
+  height: 300px;
+  background-color: #ff8800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #000000;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+  border: 1.5px solid #ff8800;
+  outline: none;
+}
+
+.orange-circle:hover {
+  background-color: transparent;
+  /* background becomes transparent on hover */
+}
+
+.orange-circle:active {
+  transform: scale(0.95);
+}

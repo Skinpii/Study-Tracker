@@ -1,0 +1,60 @@
+/* TopCircles.css */
+.top-circles {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 15px;
+  z-index: 25;
+}
+
+.circle {
+  width: 150px;
+  height: 150px;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  background: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circle-timer-display {
+  font-size: 3rem;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+  text-align: center;
+}
+
+.circle-budget-display {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.budget-label {
+  font-size: 0.9rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.budget-amount {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  font-family: 'Courier New', monospace;
+}
+
+.budget-amount.positive {
+  color: #4CAF50;
+}
+
+.budget-amount.negative {
+  color: #f44336;
+}
