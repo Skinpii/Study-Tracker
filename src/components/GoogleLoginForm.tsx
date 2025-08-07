@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { useGoogleAuth } from '../contexts/GoogleAuthContext';
 
 export default function GoogleLoginForm() {
@@ -8,134 +7,97 @@ export default function GoogleLoginForm() {
     <div style={{
       width: '100vw',
       height: '100vh',
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      backgroundColor: '#282828',
+      backgroundColor: '#ffffff',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      fontFamily: 'Arial, sans-serif',
-      color: '#ffffff',
-      overflow: 'hidden'
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
     }}>
-      <motion.div 
-        style={{
-          position: 'absolute',
-          bottom: '20px',
-          left: '20px',
-          fontSize: '10rem',
-          fontWeight: 'bold',
-          color: '#ffffff',
-          lineHeight: 0.9,
-        }}
-        initial={{ opacity: 0, y: 50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 2, ease: "easeOut" }}
-      >
-        STUDY<br />TRACKER
-      </motion.div>
-
-      <motion.div
-        style={{
-          textAlign: 'center',
-          marginBottom: '3rem'
-        }}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
+      <div style={{
+        textAlign: 'center',
+        marginBottom: '3rem'
+      }}>
         <h1 style={{
-          fontSize: '3rem',
-          fontWeight: 'bold',
-          margin: '0 0 1rem 0',
-          color: '#ffffff'
+          fontSize: '2.5rem',
+          fontWeight: '300',
+          color: '#202124',
+          margin: '0 0 0.5rem 0'
         }}>
-          Welcome Back
+          Study Tracker
         </h1>
         <p style={{
-          fontSize: '1.2rem',
-          color: '#cccccc',
-          margin: 0
+          fontSize: '1rem',
+          color: '#5f6368',
+          margin: '0 0 2rem 0'
         }}>
-          Sign in to continue your study journey
+          Sign in to your account
         </p>
-      </motion.div>
+      </div>
 
-      <motion.button
+      <button
         onClick={login}
         style={{
-          position: 'fixed',
-          bottom: '30px',
-          right: '30px',
-          width: '300px',
-          height: '300px',
-          backgroundColor: '#4285f4',
-          borderRadius: '50%',
           display: 'flex',
-          flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: '1.8rem',
-          fontWeight: 'bold',
-          color: '#ffffff',
+          padding: '12px 24px',
+          backgroundColor: '#ffffff',
+          border: '1px solid #dadce0',
+          borderRadius: '8px',
+          fontSize: '14px',
+          fontWeight: '500',
+          color: '#3c4043',
           cursor: 'pointer',
-          transition: 'all 0.3s ease',
-          userSelect: 'none',
-          border: '1.5px solid #4285f4',
-          outline: 'none',
-          boxShadow: '0 4px 20px rgba(66, 133, 244, 0.3)'
+          transition: 'all 0.2s ease',
+          boxShadow: '0 1px 3px rgba(0,0,0,0.1)',
+          minWidth: '200px'
         }}
-        whileHover={{
-          backgroundColor: 'transparent',
-          scale: 1.05
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+          e.currentTarget.style.borderColor = '#c1c7cd';
         }}
-        whileTap={{
-          scale: 0.95
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = '0 1px 3px rgba(0,0,0,0.1)';
+          e.currentTarget.style.borderColor = '#dadce0';
         }}
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.8, delay: 1 }}
       >
-        <img
-          src="https://developers.google.com/identity/images/g-logo.png"
-          alt="Google"
-          style={{ 
-            width: '48px', 
-            height: '48px',
-            marginBottom: '12px',
-            background: '#fff', 
-            borderRadius: '50%',
-            padding: '8px'
-          }}
-        />
-        <span style={{ textAlign: 'center', lineHeight: '1.2' }}>
-          SIGN IN<br />WITH<br />GOOGLE
-        </span>
-      </motion.button>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          style={{ marginRight: '12px' }}
+        >
+          <path
+            fill="#4285F4"
+            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
+          />
+          <path
+            fill="#34A853"
+            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
+          />
+          <path
+            fill="#FBBC05"
+            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
+          />
+          <path
+            fill="#EA4335"
+            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
+          />
+        </svg>
+        Continue with Google
+      </button>
 
-      {/* Background decorative elements */}
-      <div style={{
-        position: 'absolute',
-        top: '10%',
-        right: '10%',
-        width: '100px',
-        height: '100px',
-        backgroundColor: '#ff8800',
-        borderRadius: '50%',
-        opacity: 0.1
-      }} />
-      <div style={{
-        position: 'absolute',
-        top: '60%',
-        left: '10%',
-        width: '60px',
-        height: '60px',
-        backgroundColor: '#4285f4',
-        borderRadius: '50%',
-        opacity: 0.1
-      }} />
+      <p style={{
+        fontSize: '12px',
+        color: '#5f6368',
+        textAlign: 'center',
+        marginTop: '2rem',
+        maxWidth: '300px',
+        lineHeight: '1.4'
+      }}>
+        By signing in, you agree to our Terms of Service and Privacy Policy
+      </p>
     </div>
   );
 } 
