@@ -229,9 +229,9 @@ const AIPoweredPage: React.FC<AIPoweredPageProps> = ({ currentPage, onNavigate, 
               type="text"
               className="search-bar"
               placeholder={statusMessage || "Create tasks, reminders, budget entries, or navigate pages..."}
-              value={statusMessage === 'Wait a sec...' ? '' : input}
-              onChange={(e) => statusMessage !== 'Wait a sec...' && setInput(e.target.value)}
-              onKeyDown={statusMessage !== 'Wait a sec...' ? handleKeyDown : undefined}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
               disabled={statusMessage === 'Wait a sec...'}
             />
           </div>

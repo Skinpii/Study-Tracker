@@ -77,15 +77,27 @@ const Dashboard: React.FC = () => {
       }
     };
 
+    const preventKeyScroll = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement;
+      
+      // More robust check for typing in input fields
+      const isTyping = target.tagName === 'INPUT' || 
+                      target.tagName === 'TEXTAREA' || 
+                      target.isContentEditable ||
+                      target.closest('input') !== null ||
+                      target.closest('textarea') !== null ||
+                      target.classList.contains('search-bar');
+      
+      if (currentPage === 1 && !isTyping && (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === ' ' || e.key === 'PageDown' || e.key === 'PageUp')) {
+        e.preventDefault();
+      }
+    };
+
     if (currentPage === 1) {
       // Disable scroll events
       window.addEventListener('wheel', preventScroll, { passive: false });
       window.addEventListener('touchmove', preventScroll, { passive: false });
-      window.addEventListener('keydown', (e) => {
-        if (currentPage === 1 && (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === ' ' || e.key === 'PageDown' || e.key === 'PageUp')) {
-          e.preventDefault();
-        }
-      });
+      window.addEventListener('keydown', preventKeyScroll);
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -94,6 +106,7 @@ const Dashboard: React.FC = () => {
     return () => {
       window.removeEventListener('wheel', preventScroll);
       window.removeEventListener('touchmove', preventScroll);
+      window.removeEventListener('keydown', preventKeyScroll);
       document.body.style.overflow = '';
     };
   }, [currentPage]);
@@ -133,7 +146,14 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       const target = event.target as HTMLElement;
-      const isTyping = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA';
+      
+      // More robust check for typing in input fields
+      const isTyping = target.tagName === 'INPUT' || 
+                      target.tagName === 'TEXTAREA' || 
+                      target.isContentEditable ||
+                      target.closest('input') !== null ||
+                      target.closest('textarea') !== null ||
+                      target.classList.contains('search-bar');
       
       if (!isTyping) {
         if (event.key === 'ArrowRight' || event.key === ' ') {

@@ -39,7 +39,6 @@
   outline: none;
   font-family: inherit;
   font-weight: 800;
-  text-transform: uppercase;
   cursor: text;
   transition: color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   box-sizing: border-box;
