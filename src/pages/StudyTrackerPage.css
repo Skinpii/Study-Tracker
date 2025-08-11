@@ -1,10 +1,12 @@
 /* StudyTrackerPage.css */
 .study-tracker-page {
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000000ff;
   overflow: hidden;
-  background-color: #000000;
 }
 
 .torch-effect {
@@ -49,6 +51,25 @@
   transform: translate(-50%, -50%) scale(1.1);
 }
 
+/* Responsive app button text sizes */
+@media (max-width: 768px) {
+  .app-button {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-button {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .app-button {
+    font-size: 1rem;
+  }
+}
+
 /* Mystical guidance message */
 .torch-guidance {
   position: absolute;
@@ -62,6 +83,7 @@
   z-index: 20;
   pointer-events: none;
   user-select: none;
+  max-width: 90%;
 }
 
 .torch-guidance p {
@@ -75,6 +97,44 @@
   font-size: 1.1rem;
   font-weight: 400;
   color: #a0a0a0; /* Same dark silver color */
+}
+
+/* Responsive torch guidance */
+@media (max-width: 768px) {
+  .torch-guidance {
+    bottom: 20px;
+    font-size: 0.9rem;
+  }
+  
+  .torch-guidance p:first-child {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .torch-guidance {
+    bottom: 15px;
+    font-size: 0.8rem;
+    max-width: 95%;
+  }
+  
+  .torch-guidance p:first-child {
+    font-size: 0.9rem;
+  }
+  
+  .torch-guidance p {
+    margin: 3px 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .torch-guidance {
+    font-size: 0.7rem;
+  }
+  
+  .torch-guidance p:first-child {
+    font-size: 0.8rem;
+  }
 }
 
 @keyframes gentleGlow {

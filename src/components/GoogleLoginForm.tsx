@@ -18,7 +18,7 @@ export default function GoogleLoginForm() {
         textAlign: 'center',
         marginBottom: '3rem'
       }}>
-       <h1 style={{
+        <h1 style={{
           fontSize: '5rem',
           fontWeight: '300',
           color: '#ffffffff',

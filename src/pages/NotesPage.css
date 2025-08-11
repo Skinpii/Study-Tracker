@@ -263,3 +263,133 @@
 .inline-content-textarea::placeholder {
   color: #666;
 }
+
+/* Responsive styles for NotesPage */
+@media (max-width: 768px) {
+  .notes-header {
+    bottom: 15px;
+    right: 15px;
+    font-size: 6rem;
+  }
+
+  .notes-app-container {
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+  }
+
+  .notes-circles-grid {
+    top: 120px;
+    left: 10px;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 10px;
+  }
+
+  .notes-circle {
+    width: 100px;
+    height: 100px;
+    border-width: 2px;
+    font-size: 2rem;
+  }
+
+  .note-text-display {
+    font-size: 4rem;
+  }
+
+  .note-editor {
+    width: 90%;
+    height: 85%;
+  }
+
+  .inline-title-input {
+    font-size: 1.5rem;
+  }
+
+  .inline-content-textarea {
+    font-size: 1rem;
+    height: 300px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notes-header {
+    bottom: 10px;
+    right: 10px;
+    font-size: 4rem;
+  }
+
+  .notes-app-container {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .notes-circles-grid {
+    top: 80px;
+    left: 5px;
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+    gap: 8px;
+  }
+
+  .notes-circle {
+    width: 80px;
+    height: 80px;
+    font-size: 1.5rem;
+  }
+
+  .note-text-display {
+    font-size: 2.5rem;
+  }
+
+  .note-editor {
+    width: 95%;
+    height: 90%;
+  }
+
+  .inline-title-input {
+    font-size: 1.2rem;
+  }
+
+  .inline-content-textarea {
+    font-size: 0.9rem;
+    height: 250px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 360px) {
+  .notes-header {
+    font-size: 3rem;
+  }
+
+  .notes-circles-grid {
+    top: 60px;
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(3, 70px);
+    gap: 6px;
+  }
+
+  .notes-circle {
+    width: 70px;
+    height: 70px;
+    font-size: 1.2rem;
+  }
+
+  .note-text-display {
+    font-size: 2rem;
+  }
+
+  .inline-title-input {
+    font-size: 1rem;
+  }
+
+  .inline-content-textarea {
+    font-size: 0.8rem;
+    height: 200px;
+  }
+}

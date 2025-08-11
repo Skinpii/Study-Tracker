@@ -172,7 +172,7 @@ const AIPoweredPage: React.FC<AIPoweredPageProps> = ({ currentPage, onNavigate, 
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);
@@ -231,7 +231,7 @@ const AIPoweredPage: React.FC<AIPoweredPageProps> = ({ currentPage, onNavigate, 
               placeholder={statusMessage || "Create tasks, reminders, budget entries, or navigate pages..."}
               value={statusMessage === 'Wait a sec...' ? '' : input}
               onChange={(e) => statusMessage !== 'Wait a sec...' && setInput(e.target.value)}
-              onKeyPress={statusMessage !== 'Wait a sec...' ? handleKeyPress : undefined}
+              onKeyDown={statusMessage !== 'Wait a sec...' ? handleKeyDown : undefined}
               disabled={statusMessage === 'Wait a sec...'}
             />
           </div>

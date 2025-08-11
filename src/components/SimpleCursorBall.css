@@ -2,11 +2,33 @@
   position: fixed;
   width: 50px;
   height: 50px;
-  background: radial-gradient(circle, #ffffff 0%);
+  background: radial-gradient(circle, #ffffff);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   mix-blend-mode: screen;
   will-change: transform;
+}
 
+/* Responsive cursor ball sizes */
+@media (max-width: 768px) {
+  .simple-cursor-ball {
+    width: 40px;
+    height: 40px;
+    box-shadow: 
+      0 0 8px rgba(255, 255, 255, 0.5),
+      0 0 16px rgba(255, 255, 255, 0.3),
+      0 0 24px rgba(255, 255, 255, 0.1);
+  }
+}
+
+@media (max-width: 480px) {
+  .simple-cursor-ball {
+    width: 30px;
+    height: 30px;
+    box-shadow: 
+      0 0 6px rgba(255, 255, 255, 0.5),
+      0 0 12px rgba(255, 255, 255, 0.3),
+      0 0 18px rgba(255, 255, 255, 0.1);
+  }
 }

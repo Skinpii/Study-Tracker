@@ -182,3 +182,69 @@
     transform: translateY(0);
   }
 }
+
+/* Responsive styles for AIPoweredPage */
+@media (max-width: 768px) {
+  .search-container {
+    width: 90%;
+    margin-bottom: 1.5rem;
+  }
+
+  .search-bar {
+    padding: 15px 12px;
+    font-size: 1.1rem;
+  }
+
+  .search-result {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .result-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-container {
+    width: 95%;
+    margin-bottom: 1rem;
+  }
+
+  .search-bar {
+    padding: 12px 10px;
+    font-size: 1rem;
+  }
+
+  .search-result {
+    padding: 12px;
+    margin-bottom: 12px;
+  }
+
+  .result-text {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 360px) {
+  .search-container {
+    width: 98%;
+  }
+
+  .search-bar {
+    padding: 10px 8px;
+    font-size: 0.9rem;
+  }
+
+  .search-result {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .result-text {
+    font-size: 0.7rem;
+    line-height: 1.3;
+  }
+}
