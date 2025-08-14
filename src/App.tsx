@@ -138,11 +138,12 @@ const AppContent: React.FC = () => {
   const { currentPage } = useCurrentPage();
   const shouldHideUI = currentPage === 1;
   
+  // Require authentication for all users
   if (!user) return <GoogleLoginForm />;
   
   return (
     <>
-      {!shouldHideUI && (
+      {!shouldHideUI && user && (
         <div style={{ position: 'absolute', top: 20, right: 20, display: 'flex', alignItems: 'center', gap: 12 }}>
           {user.picture && <img src={user.picture} alt="avatar" style={{ width: 36, height: 36, borderRadius: '50%' }} />}
           <span style={{ fontWeight: 500, color: '#333', marginRight: 8 }}>{user.email}</span>

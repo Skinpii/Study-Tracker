@@ -8,7 +8,7 @@ import './App.css';
 import TopCircles from './components/TopCircles';
 import Description from './components/Description';
 import SimpleCursorBall from './components/SimpleCursorBall';
-import StudyTrackerPage from './pages/StudyTrackerPage';
+import AnalyticsPage from './pages/AnalyticsPage';
 import AIPoweredPage from './pages/AIPoweredPage';
 import TaskManagerPage from './pages/TaskManagerPage_updated';
 import ReminderPage from './pages/ReminderPage_updated';
@@ -33,7 +33,7 @@ const Dashboard: React.FC = () => {
 
   // Page descriptions
   const pageTexts = {
-    1: "Track your study hours, set goals, stay focused, and boost productivity with this simple, sleek, and smart study tracker app.",
+    1: "Comprehensive analytics dashboard showing your study progress, task completion rates, and productivity insights to help you track your learning journey.",
     2: "AI-powered study tracker with smart search, task manager, reminders, and goal setting—stay organized, productive, and focused every day.",
     3: "Advanced analytics, progress tracking, and productivity insights to help you achieve your study goals faster and more efficiently.",
     4: "Never miss important deadlines with smart reminders, time-based notifications, and priority alerts to keep you on track always.",
@@ -67,49 +67,8 @@ const Dashboard: React.FC = () => {
     return () => unsubscribe();
   }, [scrollYProgress]);
 
-  // Disable scrolling on front page while allowing navigation
-  useEffect(() => {
-    const preventScroll = (e: Event) => {
-      if (currentPage === 1) {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }
-    };
-
-    const preventKeyScroll = (e: KeyboardEvent) => {
-      const target = e.target as HTMLElement;
-      
-      // More robust check for typing in input fields
-      const isTyping = target.tagName === 'INPUT' || 
-                      target.tagName === 'TEXTAREA' || 
-                      target.isContentEditable ||
-                      target.closest('input') !== null ||
-                      target.closest('textarea') !== null ||
-                      target.classList.contains('search-bar');
-      
-      if (currentPage === 1 && !isTyping && (e.key === 'ArrowDown' || e.key === 'ArrowUp' || e.key === ' ' || e.key === 'PageDown' || e.key === 'PageUp')) {
-        e.preventDefault();
-      }
-    };
-
-    if (currentPage === 1) {
-      // Disable scroll events
-      window.addEventListener('wheel', preventScroll, { passive: false });
-      window.addEventListener('touchmove', preventScroll, { passive: false });
-      window.addEventListener('keydown', preventKeyScroll);
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
-    return () => {
-      window.removeEventListener('wheel', preventScroll);
-      window.removeEventListener('touchmove', preventScroll);
-      window.removeEventListener('keydown', preventKeyScroll);
-      document.body.style.overflow = '';
-    };
-  }, [currentPage]);
+  // Note: Scroll prevention removed since Analytics page should be scrollable
+  // No special scroll handling needed for analytics page
 
   // Navigation function
   const goToPage = (pageNumber: number) => {
@@ -123,23 +82,6 @@ const Dashboard: React.FC = () => {
       top: targetScroll,
       behavior: 'smooth'
     });
-  };
-
-  // Handle app navigation from StudyTrackerPage
-  const handleAppNavigation = (appRoute: string) => {
-    const routeToPageMap: { [key: string]: number } = {
-      'ai-powered': 2,
-      'tasks': 3,
-      'reminders': 4,
-      'notes': 5,
-      'budget': 6,
-      'study-hours': 7,
-    };
-    
-    const pageNumber = routeToPageMap[appRoute];
-    if (pageNumber) {
-      goToPage(pageNumber);
-    }
   };
 
   // Keyboard navigation
@@ -203,9 +145,9 @@ const Dashboard: React.FC = () => {
         <TopCircles currentPage={currentPage} />
         <Description currentPage={currentPage} pageTexts={pageTexts} />
 
-      {/* Page 1 - Study Tracker */}
+      {/* Page 1 - Analytics */}
       <div className="page page-1">
-        <StudyTrackerPage onNavigateToApp={handleAppNavigation} />
+        <AnalyticsPage currentPage={currentPage} />
       </div>
 
       {/* Page 2 - AI Powered */}

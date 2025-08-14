@@ -2,7 +2,7 @@
 .layout {
   display: flex;
   min-height: 100vh;
-  background: #0a0a0a;
+  background: #2C2C2C;
 }
 
 .main-content {
@@ -25,8 +25,8 @@
   top: 0;
   width: 280px;
   height: 100vh;
-  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(180deg, #404040 0%, #2C2C2C 100%);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
   padding: 24px 0;
   overflow-y: auto;
   z-index: 1000;
@@ -221,7 +221,7 @@
 /* Landing Page Styles */
 .landing-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2a2a2a 100%);
+  background: linear-gradient(135deg, #2C2C2C 0%, #404040 50%, #606060 100%);
 }
 
 .hero {
