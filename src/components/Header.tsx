@@ -1,6 +1,8 @@
 import { Bell, Search, User, LogOut } from 'lucide-react';
+import { useGoogleAuth } from '../contexts/GoogleAuthContext';
 
 export function Header() {
+  const { user, logout } = useGoogleAuth();
   return (
     <header className="header">
       <div className="header-left">
@@ -13,27 +15,29 @@ export function Header() {
           />
         </div>
       </div>
-      
       <div className="header-right">
         <button className="notification-btn">
           <Bell size={20} />
           <span className="notification-badge">3</span>
         </button>
-        
         <div className="user-profile">
           <div className="user-avatar">
-            <User size={20} />
+            {user?.picture ? (
+              <img src={user.picture} alt="avatar" style={{ width: 32, height: 32, borderRadius: '50%' }} />
+            ) : (
+              <User size={20} />
+            )}
           </div>
           <div className="user-info">
             <span className="user-name">
-              {/* {currentUser?.displayName || 'Student'} */}
+              {user?.name || 'Student'}
             </span>
             <span className="user-email">
-              {/* {currentUser?.email} */}
+              {user?.email}
             </span>
           </div>
         </div>
-        <button className="logout-btn" title="Sign out">
+        <button className="logout-btn" title="Sign out" onClick={logout}>
           <LogOut size={18} />
           <span>Sign Out</span>
         </button>
