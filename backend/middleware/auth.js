@@ -7,8 +7,8 @@ async function authenticateGoogleToken(req, res, next) {
   
   const token = authHeader.split(' ')[1];
   
-  // Development mode: Accept mock token
-  if (token === 'dev-token-123' || process.env.NODE_ENV === 'development') {
+  // Development mode: Accept mock token (works in both dev and production)
+  if (token === 'dev-token-123') {
     req.user = {
       sub: 'dev-user-123',
       email: 'devuser@example.com',
