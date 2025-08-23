@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  overflow-y: auto;
+  overflow: hidden;
   padding: 20px;
   box-sizing: border-box;
   background-color: #2C2C2C;
@@ -126,8 +126,8 @@
 /* Statistics Section - Minimal */
 .stats-section {
   position: absolute;
-  top: 50px;
-  right: 50px;
+  top: 0px;
+  left: 550px;
   width: 600px;
   z-index: 10;
   background: transparent;
@@ -184,11 +184,12 @@
 /* Sessions Section - Minimal */
 .sessions-section {
   position: absolute;
-  top: 480px;
-  right: 130px;
-  width: 600px; 
+  top: 50%;
+  right: 180px;
+  transform: translateY(-50%);
+  width: 80px; 
   z-index: 10;
-  max-height: 300px;
+  max-height: 200px;
 }
 
 .sessions-header {
@@ -305,22 +306,14 @@
   color: #ff8800;
 }
 
-/* Custom scrollbar - Minimal */
+/* Hidden scrollbar */
+.sessions-list {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
 .sessions-list::-webkit-scrollbar {
-  width: 4px;
-}
-
-.sessions-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.sessions-list::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 2px;
-}
-
-.sessions-list::-webkit-scrollbar-thumb:hover {
-  background: #ff8800;
+  display: none; /* Safari and Chrome */
 }
 
 /* Animations */
@@ -346,7 +339,7 @@
   }
   
   .sessions-section {
-    width: 500px;
+    width: 80px;
   }
   
   .stats-grid {
@@ -369,7 +362,7 @@
   
   .sessions-section {
     bottom: 180px;
-    width: 450px;
+    width: 80px;
   }
 }
 
@@ -398,6 +391,6 @@
     .sessions-section {
     bottom: 160px;
     right: 20px;
-    width: calc(100% - 40px);
+    width: 80px;
   }
 }

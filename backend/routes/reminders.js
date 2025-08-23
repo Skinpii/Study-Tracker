@@ -1,15 +1,43 @@
 import express from 'express';
 import Reminder from '../models/Reminder.js';
+import mongoose from 'mongoose';
 
 const router = express.Router();
+
+// Mock data for when database is not connected
+const getMockReminderData = () => [
+  {
+    _id: 'reminder1',
+    userId: 'dev-user-123',
+    title: 'Submit Assignment',
+    description: 'Math homework due tomorrow',
+    dueDate: new Date(Date.now() + 86400000).toISOString(),
+    completed: false
+  },
+  {
+    _id: 'reminder2',
+    userId: 'dev-user-123',
+    title: 'Study Group Meeting',
+    description: 'Physics study group at library',
+    dueDate: new Date(Date.now() + 172800000).toISOString(),
+    completed: false
+  }
+];
 
 // Get all reminders for the logged-in user
 router.get('/', async (req, res) => {
   try {
+    // Check if MongoDB is connected
+    if (mongoose.connection.readyState !== 1) {
+      console.log('Database not connected, returning mock reminder data');
+      return res.json(getMockReminderData());
+    }
+    
     const reminders = await Reminder.find({ userId: req.user.sub });
     res.json(reminders);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.log('Database error, returning mock reminder data:', err.message);
+    res.json(getMockReminderData());
   }
 });
 

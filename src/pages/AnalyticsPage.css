@@ -1,4 +1,4 @@
-/* AnalyticsPage.css - Modern Dashboard Design */
+/* Analytics Page Styles - Full Page without Card Separations */
 .analytics-page {
   width: 100vw;
   height: 100vh;
@@ -6,517 +6,421 @@
   top: 0;
   left: 0;
   overflow: hidden;
-  padding: 0;
+  padding: 20px;
   box-sizing: border-box;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #2C2C2C;
+  font-family: Arial, sans-serif;
   color: #ffffff;
 }
 
-/* Analytics Header - Hidden */
+/* Analytics Header - Bottom Right */
 .analytics-header {
-  display: none;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  font-size: 10rem;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeInUp 2s ease-out forwards;
+  text-align: right;
+  z-index: 1;
 }
 
-/* Main Analytics Container */
-.analytics-container {
+/* User Profile - Top Left */
+.user-profile-section {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
   z-index: 10;
+}
+
+.user-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
   overflow: hidden;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.user-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.default-avatar {
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.user-info {
+  text-align: left;
+}
+
+.user-name {
+  font-size: 1.3rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #ffffff;
+}
+
+.user-email {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Common stat styling */
+.stat-number {
+  font-size: 4rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+/* Total Tasks - Top Center */
+.total-tasks-section {
+  position: absolute;
+  top: 260px;
+  left: 200px;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  padding: 30px;
-  box-sizing: border-box;
-  gap: 25px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  padding: 20px;
+  z-index: 10;
+  transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* Loading */
-.loading-container {
+.total-tasks-section:hover {
+  transform: translateX(-50%) scale(1.1);
+  color: #ffffff;
+}
+
+/* Study Hours - Left Middle */
+.study-hours-section {
+  position: absolute;
+  top: 140px;
+  right: 100px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  padding: 20px;
+  z-index: 10;  
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.study-hours-section:hover {
+  transform: translateY(-50%) scale(1.1);
+  color: #ffffff;
+}
+
+/* Notes Created - Top Left */
+.notes-created-section {
+  position: absolute;
+  top: 70px;
+  left: 800px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  padding: 20px;
+  z-index: 10;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.notes-created-section:hover {
+  transform: scale(1.1);
+  color: #ffffff;
+}
+
+/* Active Reminders - Bottom Center */
+.active-reminders-section {
+  position: absolute;
+  bottom: 420px;
+  left: 200px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  padding: 20px;
+  z-index: 10;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.active-reminders-section:hover {
+  transform: translateX(-50%) scale(1.1);
+  color: #ffffff;
+}
+
+/* Total Budget - Center */
+.total-budget-section {
+  position: absolute;
+  top: 330px;
+  left: 580px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  padding: 20px;
+  z-index: 10;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.total-budget-section:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  color: #ffffff;
+}
+
+/* Total Spent - Right Middle */
+.total-spent-section {
+  position: absolute;
+  top: 170px;
+  left: 510px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  padding: 20px;
+  z-index: 10;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.total-spent-section:hover {
+  transform: translateY(-50%) scale(1.1);
+  color: #ffffff;
+}
+
+/* Completed Tasks - Bottom Left */
+.completed-tasks-section {
+  position: absolute;
+  bottom: 100px;
+  left: 130px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: transparent;
+  padding: 20px;
+  z-index: 10;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.completed-tasks-section:hover {
+  transform: scale(1.1);
+  color: #ffffff;
+}
+
+/* Weekly Progress - Top Right */
+.weekly-progress-section {
+  position: absolute;
+  top: 240px;
+  right: 100px;
+  width: 500px;
+  text-align: center;
+  z-index: 5;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.progress-bars {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+  height: 120px;
+  justify-content: center;
+}
+
+.progress-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  max-width: 60px;
+}
+
+.day-label {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 5px;
+  font-weight: 500;
+}
+
+.progress-bar {
+  width: 25px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.7));
+  border-radius: 15px;
+  transition: height 0.5s ease;
+}
+
+.hours-label {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+/* Logout Button */
+.logout-button {
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  margin: 0px;
+  padding: 0.5em 0.7em;
+  border-radius: 8px 0px 0px;
+  background: rgba(238, 238, 238, 0.9);
+  color: rgb(68, 68, 68);
+  border-top: 1px solid rgb(204, 204, 204);
+  border-right: none;
+  border-bottom: none;
+  border-left: 1px solid rgb(204, 204, 204);
+  font-size: 18px;
+  z-index: 1000;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px -2px 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.logout-button:hover {
+  background: rgba(220, 220, 220, 0.9);
+}
+
+/* Loading and Error States */
+.loading-message, .error-message {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-}
-
-.loading-spinner {
-  width: 50px;
-  height: 50px;
-  border: 4px solid rgba(255, 255, 255, 0.1);
-  border-left: 4px solid #ffffff;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 0 auto 20px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.error-message {
-  text-align: center;
-  max-width: 400px;
-}
-
-.error-message h3 {
-  margin: 0 0 15px 0;
+  color: #ffffff;
   font-size: 1.5rem;
-  color: #ffffff;
-}
-
-.error-message p {
-  margin: 0;
-  font-size: 1rem;
-  color: #cccccc;
-  line-height: 1.5;
-}
-
-/* Top Stats Bar */
-.top-stats-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 20px;
-  padding: 25px 35px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.user-section {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.user-name {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: #ffffff;
-  margin-bottom: 2px;
-}
-
-.user-email {
-  font-size: 0.9rem;
-  color: #cccccc;
-  opacity: 0.8;
-}
-
-.main-metric {
-  text-align: center;
-  flex: 1;
-}
-
-.metric-value {
-  font-size: 4rem;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1;
-  margin-bottom: 5px;
-}
-
-.metric-label {
-  font-size: 1.2rem;
-  color: #cccccc;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.secondary-metrics {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-}
-
-.mini-metric {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-
-.mini-value {
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #ffffff;
-}
-
-.mini-label {
-  font-size: 0.9rem;
-  color: #999999;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-/* Activity Grid */
-.activity-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 25px;
-  flex: 1;
-}
-
-.activity-card {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  padding: 25px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-}
-
-.activity-card:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.card-header h3 {
-  margin: 0;
-  font-size: 1.1rem;
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.card-icon {
-  font-size: 1.5rem;
-  opacity: 0.8;
-}
-
-.card-footer {
-  margin-top: auto;
-  font-size: 0.9rem;
-  color: #999999;
-  text-align: center;
-}
-
-/* Study Sessions Card */
-.weekly-chart {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  height: 120px;
-  margin-bottom: 15px;
-  padding: 0 10px;
-}
-
-.day-bar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: 100%;
-  flex: 1;
-  max-width: 30px;
-}
-
-.bar-fill {
-  width: 20px;
-  background: linear-gradient(to top, #4CAF50, #81C784);
-  border-radius: 10px 10px 3px 3px;
-  margin-bottom: 8px;
-  min-height: 10px;
-  transition: all 0.3s ease;
-}
-
-.day-bar:hover .bar-fill {
-  background: linear-gradient(to top, #66BB6A, #A5D6A7);
-  transform: scaleY(1.1);
-}
-
-.day-label {
-  font-size: 0.8rem;
-  color: #cccccc;
-  font-weight: 500;
-}
-
-/* Tasks Overview Card */
-.circular-progress {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-
-.progress-circle {
-  position: relative;
-  width: 120px;
-  height: 120px;
-}
-
-.progress-ring {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.progress-center {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.progress-percent {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.progress-text {
-  font-size: 0.7rem;
-  color: #cccccc;
-  text-transform: uppercase;
-}
-
-/* Budget Flow Card */
-.budget-visual {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-}
-
-.budget-bar {
-  width: 100%;
-  height: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-}
-
-.spent-portion {
-  height: 100%;
-  background: linear-gradient(to right, #FF6B6B, #FF8E53);
-  border-radius: 10px;
-  transition: width 0.3s ease;
-}
-
-.budget-numbers {
-  display: flex;
-  justify-content: space-between;
-}
-
-.budget-spent, .budget-remaining {
-  text-align: center;
-}
-
-.budget-spent .amount {
-  color: #FF6B6B;
-  font-size: 1.3rem;
-  font-weight: 600;
-  display: block;
-}
-
-.budget-remaining .amount {
-  color: #4CAF50;
-  font-size: 1.3rem;
-  font-weight: 600;
-  display: block;
-}
-
-.budget-spent .label, .budget-remaining .label {
-  font-size: 0.8rem;
-  color: #999999;
-  text-transform: uppercase;
-}
-
-/* Quick Stats Card */
-.stats-list {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  gap: 15px;
-}
-
-.stat-row {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-}
-
-.stat-icon {
-  font-size: 1.2rem;
-}
-
-.stat-count {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: #ffffff;
-  min-width: 40px;
-}
-
-.stat-label {
-  font-size: 0.9rem;
-  color: #cccccc;
-  flex: 1;
-}
-
-/* Spending Overview */
-.spending-overview {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  padding: 25px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.spending-overview h3 {
-  margin: 0 0 20px 0;
-  font-size: 1.2rem;
-  color: #ffffff;
-  font-weight: 600;
-}
-
-.category-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
-}
-
-.category-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  transition: all 0.3s ease;
-}
-
-.category-item:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
-}
-
-.category-icon {
-  font-size: 1.5rem;
-  width: 40px;
-  text-align: center;
-}
-
-.category-details {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.category-name {
-  font-size: 0.9rem;
-  color: #ffffff;
-  font-weight: 500;
-}
-
-.category-amount {
-  font-size: 1.1rem;
-  color: #4CAF50;
-  font-weight: 600;
-}
-
-.category-percent {
-  font-size: 1rem;
-  color: #cccccc;
-  font-weight: 600;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .analytics-container {
-    padding: 20px;
-    gap: 20px;
-  }
-  
-  .top-stats-bar {
-    flex-direction: column;
-    gap: 20px;
-    text-align: center;
-  }
-  
-  .user-section {
-    justify-content: center;
-  }
-  
-  .main-metric {
-    text-align: center;
-  }
-  
-  .secondary-metrics {
-    gap: 30px;
-    justify-content: center;
-  }
-  
-  .activity-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
-  }
-  
-  .category-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 480px) {
-  .analytics-container {
-    padding: 15px;
-    gap: 15px;
-  }
-  
-  .top-stats-bar {
-    padding: 20px;
-  }
-  
-  .user-section {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .metric-value {
-    font-size: 3rem;
-  }
-  
-  .secondary-metrics {
-    gap: 20px;
-    flex-wrap: wrap;
-  }
-  
-  .mini-value {
-    font-size: 1.5rem;
-  }
+  background: transparent;
+  padding: 40px;
+  z-index: 10;
 }
 
 /* Animations */
 @keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .stat-number {
+    font-size: 3rem;
+  }
+  
+  .analytics-header {
+    font-size: 8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-header {
+    font-size: 6rem;
+    bottom: 10px;
+    right: 10px;
+  }
+  
+  .user-profile-section {
+    top: 10px;
+    right: 10px;
+    scale: 0.8;
+  }
+  
+  .stat-number {
+    font-size: 2.5rem;
+  }
+  
+  .weekly-progress-section {
+    width: 90%;
+    bottom: 80px;
+  }
+  
+  /* Adjust positioning for smaller screens */
+  .total-tasks-section {
+    top: 10px;
+  }
+  
+  .notes-created-section {
+    top: 80px;
+    left: 10px;
+  }
+  
+  .study-hours-section {
+    right: 10px;
+  }
+  
+  .completed-tasks-section {
+    bottom: 10px;
+    left: 10px;
+  }
+  
+  .total-spent-section {
+    right: 10px;
   }
 }

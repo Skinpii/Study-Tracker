@@ -5,7 +5,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  overflow-y: auto;
+  overflow: hidden;
   padding: 20px;
   box-sizing: border-box;
   background-color: #2C2C2C;
@@ -303,22 +303,14 @@
   color: #ff8800;
 }
 
-/* Custom scrollbar */
+/* Hidden scrollbar */
+.transactions-list {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
 .transactions-list::-webkit-scrollbar {
-  width: 4px;
-}
-
-.transactions-list::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.transactions-list::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 2px;
-}
-
-.transactions-list::-webkit-scrollbar-thumb:hover {
-  background: #ff8800;
+  display: none; /* Safari and Chrome */
 }
 
 /* Loading state */

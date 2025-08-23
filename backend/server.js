@@ -29,15 +29,36 @@ app.use('/api/study-sessions', studySessionsRouter);
 
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => {
+// MongoDB connection with better error handling
+const connectToMongoDB = async () => {
+  try {
+    if (!process.env.MONGODB_URI) {
+      console.warn('MONGODB_URI not set, running without database');
+      startServer();
+      return;
+    }
+
+    await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    
+    console.log('Connected to MongoDB successfully');
+    startServer();
+  } catch (err) {
+    console.error('MongoDB connection error:', err.message);
+    console.warn('Starting server without database connection...');
+    startServer();
+  }
+};
+
+const startServer = () => {
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
+    if (!process.env.MONGODB_URI) {
+      console.log('Note: Running without database - data will not persist');
+    }
   });
-})
-.catch((err) => {
-  console.error('MongoDB connection error:', err);
-}); 
+};
+
+connectToMongoDB(); 

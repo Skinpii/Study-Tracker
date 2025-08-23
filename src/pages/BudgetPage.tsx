@@ -96,17 +96,10 @@ const BudgetPage: React.FC<BudgetPageProps> = ({ currentPage }) => {
       return;
     }
 
-    const now = new Date();
-    const today = now.toDateString();
-    const oneWeekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
-    const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
-
     // Calculate income/expense stats using the type field
     const totalIncome = entryList.filter(e => e.type === 'income').reduce((sum, e) => sum + e.amount, 0);
     const totalExpenses = entryList.filter(e => e.type === 'expense').reduce((sum, e) => sum + e.amount, 0);
     const totalBalance = totalIncome - totalExpenses;
-    const incomeEntries = entryList.filter(e => e.type === 'income');
-    const expenseEntries = entryList.filter(e => e.type === 'expense');
 
     // Calculate top category
     const categoryTotals: { [key: string]: number } = {};
@@ -122,8 +115,8 @@ const BudgetPage: React.FC<BudgetPageProps> = ({ currentPage }) => {
       totalIncome: Math.round(totalIncome * 100) / 100,
       totalExpenses: Math.round(totalExpenses * 100) / 100,
       totalTransactions: entryList.length,
-      averageIncome: incomeEntries.length > 0 ? Math.round((totalIncome / incomeEntries.length) * 100) / 100 : 0,
-      averageExpense: expenseEntries.length > 0 ? Math.round((totalExpenses / expenseEntries.length) * 100) / 100 : 0,
+      averageIncome: 0,
+      averageExpense: 0,
       todayBalance: 0,
       weekBalance: 0,
       monthBalance: 0,
@@ -240,33 +233,16 @@ const BudgetPage: React.FC<BudgetPageProps> = ({ currentPage }) => {
             <div className="stat-value">{stats.totalTransactions}</div>
             <div className="stat-label">Transactions</div>
           </div>          <div className="stat-item">
-            <div className="stat-value">₹{stats.averageIncome}</div>
-            <div className="stat-label">Avg Income</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value">₹{stats.averageExpense}</div>
-            <div className="stat-label">Avg Expense</div>
-          </div>          <div className="stat-item">
             <div className={`stat-value ₹{stats.todayBalance >= 0 ? 'positive' : 'negative'}`}>
               ₹{Math.abs(stats.todayBalance)}
             </div>
             <div className="stat-label">Today</div>
           </div>
           <div className="stat-item">
-            <div className={`stat-value ₹{stats.weekBalance >= 0 ? 'positive' : 'negative'}`}>
-              ₹{Math.abs(stats.weekBalance)}
-            </div>
-            <div className="stat-label">This Week</div>
-          </div>
-          <div className="stat-item">
             <div className={`stat-value ₹{stats.monthBalance >= 0 ? 'positive' : 'negative'}`}>
               ₹{Math.abs(stats.monthBalance)}
             </div>
             <div className="stat-label">This Month</div>
-          </div>
-          <div className="stat-item">
-            <div className="stat-value top-category">{stats.topCategory}</div>
-            <div className="stat-label">Top Category</div>
           </div>
         </div>
       </div>
