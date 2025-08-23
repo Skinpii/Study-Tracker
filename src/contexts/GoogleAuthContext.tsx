@@ -41,8 +41,25 @@ export const GoogleAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       return;
     }
 
-    // DEVELOPMENT MODE: Skip login and use mock user/token
-    // Also enable in production for testing purposes
+    // Handle OAuth redirect first (for real Google login)
+    const hash = window.location.hash;
+    if (hash && hash.includes('id_token')) {
+      const params = new URLSearchParams(hash.replace(/^#/, ''));
+      const idToken = params.get('id_token');
+      if (idToken) {
+        setToken(idToken);
+        try {
+          const user = JSON.parse(atob(idToken.split('.')[1]));
+          setUser(user);
+          localStorage.setItem('google_token', idToken);
+          localStorage.setItem('google_user', JSON.stringify(user));
+          window.location.hash = '';
+        } catch {}
+      }
+      return;
+    }
+
+    // FALLBACK: Use dev token only if no Google login and in allowed environments
     if (process.env.NODE_ENV === 'development' || 
         window.location.hostname === 'localhost' ||
         window.location.hostname.includes('onrender.com')) {
@@ -58,23 +75,6 @@ export const GoogleAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       localStorage.setItem('google_token', mockToken);
       localStorage.setItem('google_user', JSON.stringify(mockUser));
       return;
-    }
-
-    // Handle OAuth redirect
-    const hash = window.location.hash;
-    if (hash && hash.includes('id_token')) {
-      const params = new URLSearchParams(hash.replace(/^#/, ''));
-      const idToken = params.get('id_token');
-      if (idToken) {
-        setToken(idToken);
-        try {
-          const user = JSON.parse(atob(idToken.split('.')[1]));
-          setUser(user);
-          localStorage.setItem('google_token', idToken);
-          localStorage.setItem('google_user', JSON.stringify(user));
-          window.location.hash = '';
-        } catch {}
-      }
     }
   }, []);
 
