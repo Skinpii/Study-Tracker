@@ -42,7 +42,10 @@ export const GoogleAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     }
 
     // DEVELOPMENT MODE: Skip login and use mock user/token
-    if (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost') {
+    // Also enable in production for testing purposes
+    if (process.env.NODE_ENV === 'development' || 
+        window.location.hostname === 'localhost' ||
+        window.location.hostname.includes('onrender.com')) {
       const mockUser = {
         sub: 'dev-user-123',
         email: 'devuser@example.com',
