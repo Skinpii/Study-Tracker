@@ -36,9 +36,19 @@ export const GoogleAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     const savedToken = localStorage.getItem('google_token');
     const savedUser = localStorage.getItem('google_user');
     if (savedToken && savedUser) {
-      setToken(savedToken);
-      setUser(JSON.parse(savedUser));
-      return;
+      const parsedUser = JSON.parse(savedUser);
+      
+      // If saved user has dev-user-123 but token is not dev-token-123, clear it
+      // This handles the case where Google users were previously saved with wrong ID
+      if (parsedUser.sub === 'dev-user-123' && savedToken !== 'dev-token-123') {
+        localStorage.removeItem('google_token');
+        localStorage.removeItem('google_user');
+        // Fall through to OAuth redirect or dev token logic
+      } else {
+        setToken(savedToken);
+        setUser(parsedUser);
+        return;
+      }
     }
 
     // Handle OAuth redirect first (for real Google login)
