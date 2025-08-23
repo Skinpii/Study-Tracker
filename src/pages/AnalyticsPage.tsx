@@ -8,7 +8,7 @@ interface AnalyticsPageProps {
 }
 
 const AnalyticsPage: React.FC<AnalyticsPageProps> = () => {
-  const { token, user } = useGoogleAuth();
+  const { token, user, logout } = useGoogleAuth();
   const [analyticsData, setAnalyticsData] = useState<AnalyticsData>({
     totalTasks: 0,
     completedTasks: 0,
@@ -293,6 +293,32 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = () => {
           </div>
         </div>
       </div>
+      
+      {/* Fixed Logout Button */}
+      <button 
+        title="Logout" 
+        onClick={logout}
+        style={{
+          position: 'fixed',
+          right: '0px',
+          bottom: '0px',
+          margin: '0px',
+          padding: '0.5em 0.7em',
+          borderRadius: '8px 0px 0px',
+          background: 'rgb(238, 238, 238)',
+          color: 'rgb(68, 68, 68)',
+          borderTop: '1px solid rgb(204, 204, 204)',
+          borderRight: 'none',
+          borderBottom: 'none',
+          borderLeft: '1px solid rgb(204, 204, 204)',
+          fontSize: '18px',
+          zIndex: 1000,
+          boxShadow: 'rgba(0, 0, 0, 0.06) 0px -2px 8px',
+          cursor: 'pointer'
+        }}
+      >
+        ⎋
+      </button>
     </div>
   );
 };
