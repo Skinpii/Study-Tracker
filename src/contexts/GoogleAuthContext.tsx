@@ -49,7 +49,14 @@ export const GoogleAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       if (idToken) {
         setToken(idToken);
         try {
-          const user = JSON.parse(atob(idToken.split('.')[1]));
+          const payload = JSON.parse(atob(idToken.split('.')[1]));
+          // Use real Google user info but map to consistent user ID for data persistence
+          const user = {
+            sub: 'dev-user-123', // Always use same user ID for data consistency
+            email: payload.email,
+            name: payload.name,
+            picture: payload.picture
+          };
           setUser(user);
           localStorage.setItem('google_token', idToken);
           localStorage.setItem('google_user', JSON.stringify(user));

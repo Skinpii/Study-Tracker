@@ -18,7 +18,7 @@ async function authenticateGoogleToken(req, res, next) {
     return next();
   }
   
-  // Production mode: Verify Google token
+  // Production mode: Verify Google token but map to consistent user ID
   try {
     if (!process.env.GOOGLE_CLIENT_ID) {
       console.error('GOOGLE_CLIENT_ID not set');
@@ -30,7 +30,14 @@ async function authenticateGoogleToken(req, res, next) {
       audience: process.env.GOOGLE_CLIENT_ID,
     });
     const payload = ticket.getPayload();
-    req.user = payload; // contains sub (user id), email, name, etc.
+    
+    // Map all real Google users to the same user ID to preserve data
+    req.user = {
+      sub: 'dev-user-123', // Always use the same user ID
+      email: payload.email,
+      name: payload.name,
+      picture: payload.picture
+    };
     next();
   } catch (err) {
     console.error('Authentication error:', err.message);
