@@ -18,8 +18,7 @@ async function authenticateGoogleToken(req, res, next) {
     return next();
   }
   
-  // For any other token, just accept it and map to consistent user
-  // This ensures the app works regardless of Google OAuth configuration
+  // For Google tokens, give each user their own data
   try {
     // Try to verify Google token if client ID is available
     if (process.env.GOOGLE_CLIENT_ID) {
@@ -29,17 +28,19 @@ async function authenticateGoogleToken(req, res, next) {
       });
       const payload = ticket.getPayload();
       
-      // Map to consistent user ID for data persistence
+      // Use real Google user ID so each user has their own data
       req.user = {
-        sub: 'dev-user-123', // Always use same user ID
+        sub: payload.sub, // Use actual Google user ID
         email: payload.email,
         name: payload.name,
         picture: payload.picture
       };
     } else {
-      // If no Google client ID, just create a generic authenticated user
+      // If no Google client ID, create user based on token hash for uniqueness
+      const crypto = await import('crypto');
+      const hashedToken = crypto.createHash('sha256').update(token).digest('hex').substring(0, 12);
       req.user = {
-        sub: 'dev-user-123',
+        sub: `user-${hashedToken}`, // Unique ID based on token
         email: 'user@example.com',
         name: 'Authenticated User',
         picture: 'https://ui-avatars.com/api/?name=User&background=2C2C2C&color=fff',
@@ -48,9 +49,11 @@ async function authenticateGoogleToken(req, res, next) {
     next();
   } catch (err) {
     console.error('Authentication error:', err.message);
-    // If Google verification fails, still allow access but with generic user
+    // If Google verification fails, create unique user based on token
+    const crypto = await import('crypto');
+    const hashedToken = crypto.createHash('sha256').update(token).digest('hex').substring(0, 12);
     req.user = {
-      sub: 'dev-user-123',
+      sub: `user-${hashedToken}`,
       email: 'user@example.com',
       name: 'Authenticated User',
       picture: 'https://ui-avatars.com/api/?name=User&background=2C2C2C&color=fff',
