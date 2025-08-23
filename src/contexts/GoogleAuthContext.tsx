@@ -38,7 +38,25 @@ export const GoogleAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     if (savedToken && savedUser) {
       setToken(savedToken);
       setUser(JSON.parse(savedUser));
+      return;
     }
+
+    // DEVELOPMENT MODE: Skip login and use mock user/token
+    if (process.env.NODE_ENV === 'development' || window.location.hostname === 'localhost') {
+      const mockUser = {
+        sub: 'dev-user-123',
+        email: 'devuser@example.com',
+        name: 'Dev User',
+        picture: 'https://ui-avatars.com/api/?name=Dev+User&background=2C2C2C&color=fff',
+      };
+      const mockToken = 'dev-token-123';
+      setUser(mockUser);
+      setToken(mockToken);
+      localStorage.setItem('google_token', mockToken);
+      localStorage.setItem('google_user', JSON.stringify(mockUser));
+      return;
+    }
+
     // Handle OAuth redirect
     const hash = window.location.hash;
     if (hash && hash.includes('id_token')) {
@@ -65,6 +83,52 @@ export const GoogleAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       localStorage.removeItem('google_token');
       localStorage.removeItem('google_user');
     }
+  }, [token, user]);
+
+  // Auto-logout when user leaves the website
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      // Clear authentication when user closes/leaves the website
+      localStorage.removeItem('google_token');
+      localStorage.removeItem('google_user');
+    };
+
+    const handleVisibilityChange = () => {
+      // Auto-logout when user switches to another tab for extended period
+      if (document.visibilityState === 'hidden') {
+        // Set a timeout to logout after 5 minutes of being away
+        const timeoutId = setTimeout(() => {
+          if (document.visibilityState === 'hidden') {
+            logout();
+          }
+        }, 5 * 60 * 1000); // 5 minutes
+
+        // Store timeout ID to clear it if user comes back
+        (window as any).logoutTimeoutId = timeoutId;
+      } else if (document.visibilityState === 'visible') {
+        // Clear the logout timeout if user comes back
+        if ((window as any).logoutTimeoutId) {
+          clearTimeout((window as any).logoutTimeoutId);
+          delete (window as any).logoutTimeoutId;
+        }
+      }
+    };
+
+    // Add event listeners
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      
+      // Clear any pending logout timeout
+      if ((window as any).logoutTimeoutId) {
+        clearTimeout((window as any).logoutTimeoutId);
+        delete (window as any).logoutTimeoutId;
+      }
+    };
   }, [token, user]);
 
   const login = () => {
@@ -96,4 +160,4 @@ export const GoogleAuthProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       {children}
     </AuthContext.Provider>
   );
-}; 
+};
